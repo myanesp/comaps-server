@@ -23,8 +23,14 @@ def fetch_country_json(cdn_host, version):
     return r.json()
 
 def expand_maps(user_maps, cdn_host, version):
-    """Expand countries/groups into all sub-maps"""
-    data = fetch_country_json(cdn_host, version)
+    """
+    Expands user-specified maps/countries into a full list of .mwm files.
+    If 'all' is specified, download every map in countries.txt.
+    """
+
+    r = requests.get(f"{cdn_host}/maps/{version}/countries.txt", timeout=30)
+    r.raise_for_status()
+    data = r.json()
 
     all_maps = {}
     for entry in data.get("g", []):
@@ -34,15 +40,24 @@ def expand_maps(user_maps, cdn_host, version):
             all_maps[entry["id"]] = []
 
     expanded = []
-    for m in user_maps:
-        m_clean = m.replace(".mwm", "")
-        if m_clean in all_maps and all_maps[m_clean]:
-            for sub_map in all_maps[m_clean]:
-                expanded.append(f"{sub_map}.mwm")
-        else:
-            expanded.append(f"{m_clean}.mwm")
 
-    return list(dict.fromkeys(expanded))
+    if len(user_maps) == 1 and user_maps[0].strip().lower() == "all":
+        for group, submaps in all_maps.items():
+            if submaps:
+                expanded.extend(submaps)
+            else:
+                expanded.append(group)
+    else:
+        for m in user_maps:
+            m_clean = m.replace(".mwm", "")
+            if m_clean in all_maps and all_maps[m_clean]:
+                for sub_map in all_maps[m_clean]:
+                    expanded.append(sub_map)
+            else:
+                expanded.append(m_clean)
+
+    expanded = [f"{x}.mwm" for x in dict.fromkeys(expanded)]
+    return expanded
 
 def download_file(url, output_path):
     """
