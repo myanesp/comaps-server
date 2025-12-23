@@ -1,0 +1,11 @@
+services:
+  maps-server:
+    image: ghcr.io/myanesp/comaps-server
+    container_name: comaps-server
+    ports:
+      - "80:80"
+    environment:
+      - MAPS=World,WorldCoasts,Spain
+      - OUTPUT_DIR=/maps
+    volumes:
+      - ./maps:/maps
