@@ -31,7 +31,6 @@ services:
       - OUTPUT_DIR=/maps
     volumes:
       - ./maps:/maps
-      - TZ=Europe/Madrid
 ```
 
 ### Run with Docker run
