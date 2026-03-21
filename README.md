@@ -1,6 +1,8 @@
 # CoMaps map Docker server
 
 [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/myanesp/comaps-server)
+[![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://hub.docker.com/r/myanesp/comaps-server/)
+[![Docker Pulls](https://badgen.net/docker/pulls/myanesp/ovh-ip-updater?icon=docker&label=pulls)](https://hub.docker.com/r/myanesp/comaps-server/)
 [![Last Commit](https://img.shields.io/github/last-commit/myanesp/comaps-server)](https://github.com/myanesp/comaps-server)
 [![Docker Image Size](https://badgen.net/docker/size/myanesp/comaps-server?icon=docker&label=image%20size)](https://hub.docker.com/r/myanesp/comaps-server/)
 [![License](https://badgen.net/github/license/myanesp/comaps-server)](LICENSE)
@@ -22,7 +24,7 @@ Starting from CoMaps version [v2025.12.19-11](https://codeberg.org/comaps/comaps
 ```yaml
 services:
   maps-server:
-    image: myanesp/comaps-server:latest
+    image: myanesp/comaps-server:latest # ghcr.io/myanesp/comaps-server:latest
     container_name: comaps-server
     ports:
       - "80:80"
@@ -42,7 +44,7 @@ docker run -d \
   -e MAPS=all \ 
   -e OUTPUT_DIR=/maps \
   -p "80:80" \
-  myanesp/comaps-server:latest
+  myanesp/comaps-server:latest # ghcr.io/myanesp/comaps-server:latest
 ```
 
 ## Environment Variables
