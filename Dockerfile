@@ -1,4 +1,4 @@
-FROM python:3.13-alpine
+FROM python:3-alpine
 
 WORKDIR /app
 
@@ -21,8 +21,3 @@ EXPOSE 80
 CMD sh -c "python -u comaps.py && nginx -g 'daemon off;'"
 
 VOLUME ["/maps"]
-
-
-
-
-
