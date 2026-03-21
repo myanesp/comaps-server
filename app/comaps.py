@@ -33,26 +33,39 @@ def expand_maps(user_maps, cdn_host, version):
     data = r.json()
 
     all_maps = {}
-    for entry in data.get("g", []):
+    all_map_ids = []
+
+    # Traverse all entries using a queue
+    queue = list(data.get("g", []))
+    while queue:
+        entry = queue.pop(0)
+        entry_id = entry.get("id")
+
+        if "s" in entry:
+            all_map_ids.append(entry_id)
+
         if "g" in entry:
-            all_maps[entry["id"]] = [sub["id"] for sub in entry["g"]]
-        else:
-            all_maps[entry["id"]] = []
+            # Collect ALL descendant maps (not just direct children)
+            child_ids = []
+            child_queue = list(entry["g"])
+            while child_queue:
+                child = child_queue.pop(0)
+                queue.append(child)
+                if "s" in child:
+                    child_ids.append(child.get("id"))
+                if "g" in child:
+                    child_queue.extend(child["g"])
+            all_maps[entry_id] = child_ids
 
     expanded = []
 
     if len(user_maps) == 1 and user_maps[0].strip().lower() == "all":
-        for group, submaps in all_maps.items():
-            if submaps:
-                expanded.extend(submaps)
-            else:
-                expanded.append(group)
+        expanded.extend(all_map_ids)
     else:
         for m in user_maps:
             m_clean = m.replace(".mwm", "")
             if m_clean in all_maps and all_maps[m_clean]:
-                for sub_map in all_maps[m_clean]:
-                    expanded.append(sub_map)
+                expanded.extend(all_maps[m_clean])
             else:
                 expanded.append(m_clean)
 
@@ -110,4 +123,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
