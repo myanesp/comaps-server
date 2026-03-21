@@ -2,7 +2,7 @@
 
 [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/myanesp/comaps-server)
 [![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://hub.docker.com/r/myanesp/comaps-server/)
-[![Docker Pulls](https://badgen.net/docker/pulls/myanesp/ovh-ip-updater?icon=docker&label=pulls)](https://hub.docker.com/r/myanesp/comaps-server/)
+[![Docker Pulls](https://badgen.net/docker/pulls/myanesp/comaps-server?icon=docker&label=pulls)](https://hub.docker.com/r/myanesp/comaps-server/)
 [![Last Commit](https://img.shields.io/github/last-commit/myanesp/comaps-server)](https://github.com/myanesp/comaps-server)
 [![Docker Image Size](https://badgen.net/docker/size/myanesp/comaps-server?icon=docker&label=image%20size)](https://hub.docker.com/r/myanesp/comaps-server/)
 [![License](https://badgen.net/github/license/myanesp/comaps-server)](LICENSE)
