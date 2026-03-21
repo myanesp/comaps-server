@@ -22,7 +22,7 @@ Starting from CoMaps version [v2025.12.19-11](https://codeberg.org/comaps/comaps
 ```yaml
 services:
   maps-server:
-    image: ghcr.io/myanesp/comaps-server
+    image: myanesp/comaps-server:latest
     container_name: comaps-server
     ports:
       - "80:80"
@@ -43,7 +43,7 @@ docker run -d \
   -e MAPS=all \ 
   -e OUTPUT_DIR=/maps \
   -p "80:80" \
-  ghcr.io/myanesp/comaps-server:latest
+  myanesp/comaps-server:latest
 ```
 
 ## Environment Variables
